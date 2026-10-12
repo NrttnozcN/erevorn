@@ -249,7 +249,9 @@ func show_start() -> void:
 	var stones := UiKit.label("Ruh Taşı: %d" % Game.soul_stones, 10, true, UiKit.PURPLE)
 	stones.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	rv.add_child(stones)
-	for b in [["DEVAM ET", _start], ["RUH TAŞLARI", show_meta], ["TAM EKRAN", _toggle_fullscreen], ["ÇIKIŞ", func(): get_tree().quit()]]:
+	var resume := Game.saved_run()
+	var cont_label := "DEVAM ET (KAT %d)" % int(resume.oyun.get("floor_number", 1)) if not resume.is_empty() else "DEVAM ET"
+	for b in [[cont_label, _continue], ["RUH TAŞLARI", show_meta], ["TAM EKRAN", _toggle_fullscreen], ["ÇIKIŞ", func(): get_tree().quit()]]:
 		var btn := UiKit.button(b[0], 10, UiKit.TEXT)
 		btn.custom_minimum_size = Vector2(0, 38)
 		btn.pressed.connect(b[1])
@@ -260,6 +262,14 @@ func show_start() -> void:
 func _start() -> void:
 	close()
 	main.start_run(selected_style)
+
+
+## Yarım koşu varsa onu sürdürür, yoksa seçili tarzla yeni iniş.
+func _continue() -> void:
+	if Game.has_run():
+		main.continue_run()
+	else:
+		_start()
 
 
 func _toggle_fullscreen() -> void:
@@ -779,7 +789,7 @@ func show_shop() -> void:
 			m.stock.append({"item": item, "price": int(base * pm)})
 	var parts := _center_card(Vector2(900, 0), Color(1, 0.84, 0, 0.45))
 	var v: VBoxContainer = parts[1]
-	_title(v, "GİZEMLİ SATICI" + (" ✦" if m.special else ""), UiKit.GOLD, 16)
+	_title(v, "GİZEMLİ SATICI" + (" (ÖZEL)" if m.special else ""), UiKit.GOLD, 16)
 	var gold := UiKit.label("Altının: %d" % Game.gold, 10, true, UiKit.GOLD)
 	gold.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	v.add_child(gold)
@@ -1000,9 +1010,9 @@ func show_ending_choice() -> void:
 	_para(v, "Kârun yenildi. Dünyanın Kalbi önünde atıyor. Ne yapacaksın?", 15)
 	_para(v, "Kurtarılan: %d  |  Öldürülen: %d" % [Game.run_rescues, Game.kills], 12, UiKit.TEXT_DIM)
 	var opts := [
-		["light", "✨ IŞIK YOLU — Kârun'u öldürme, mühür çeliğiyle yozlaşmasını çöz", Game.run_rescues >= 3, "En az 3 tutsak kurtar"],
-		["iron", "⚔ DEMİR YOLU — Kârun'u öldür, Kalp'i kendi kanınla mühürle", true, ""],
-		["dark", "💀 KARANLIK YOLU — Asayı al, Kara Taht'a otur", Game.kills >= 150, "En az 150 düşman öldür"],
+		["light", "IŞIK YOLU — Kârun'u öldürme, mühür çeliğiyle yozlaşmasını çöz", Game.run_rescues >= 3, "En az 3 tutsak kurtar"],
+		["iron", "DEMİR YOLU — Kârun'u öldür, Kalp'i kendi kanınla mühürle", true, ""],
+		["dark", "KARANLIK YOLU — Asayı al, Kara Taht'a otur", Game.kills >= 150, "En az 150 düşman öldür"],
 	]
 	var buttons: Array[Button] = []
 	for o in opts:

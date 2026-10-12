@@ -71,7 +71,7 @@ func _draw_quest(at: Vector2) -> void:
 	draw_rect(r, Color(0.0, 0.25, 0.08, 0.85) if done else Color(0.03, 0.06, 0.09, 0.85))
 	draw_rect(r, Color(0, 0.94, 1, 0.45) if not done else Color(0.2, 1, 0.3, 0.6), false, 1.5)
 	draw_string(UiKit.PIXEL, at + Vector2(10, 20), "GÖREV: " + q.title, HORIZONTAL_ALIGNMENT_LEFT, -1, 9, UiKit.CYAN)
-	var desc := "✓ TAMAMLANDI!" if done else "%s (%d/%d)" % [q.desc, q.progress, q.target]
+	var desc := "TAMAMLANDI!" if done else "%s (%d/%d)" % [q.desc, q.progress, q.target]
 	draw_string(UiKit.PIXEL, at + Vector2(10, 42), desc, HORIZONTAL_ALIGNMENT_LEFT, 236, 7, UiKit.GREEN if done else UiKit.TEXT)
 
 

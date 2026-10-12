@@ -170,6 +170,7 @@ func soul_stone_reward() -> int:
 
 func save() -> void:
 	var cfg := ConfigFile.new()
+	cfg.load(save_path)  # yarım koşu kaydı ("kosu") korunur
 	cfg.set_value("kalici", "ruh_tasi", soul_stones)
 	cfg.set_value("kalici", "meta", meta)
 	cfg.set_value("kalici", "basarimlar", achievements)
@@ -177,6 +178,56 @@ func save() -> void:
 	cfg.set_value("kalici", "kurtarma", lifetime_rescues)
 	cfg.set_value("kalici", "egitim_tamam", tutorial_done)
 	cfg.save(save_path)
+
+
+## Yarım kalan koşu: her kata girişte yazılır, "DEVAM ET" o katın başından sürdürür.
+const RUN_KEYS := ["style", "floor_number", "gold", "lives", "max_lives", "kills", "run_rescues", "training_purchases",
+	"barter", "lifesteal_upgrade", "bosses_killed", "quests_completed", "quest", "triggered", "sera_bound"]
+const PLAYER_KEYS := ["base", "hp", "level", "xp", "next_xp", "equipment", "inventory", "attack_cd_base", "dash_cd_max", "perm"]
+
+
+func save_run(p: Node) -> void:
+	var cfg := ConfigFile.new()
+	cfg.load(save_path)
+	var run := {}
+	for k in RUN_KEYS:
+		run[k] = get(k)
+	var pl := {}
+	for k in PLAYER_KEYS:
+		pl[k] = p.get(k)
+	cfg.set_value("kosu", "oyun", run)
+	cfg.set_value("kosu", "oyuncu", pl)
+	cfg.save(save_path)
+
+
+func has_run() -> bool:
+	var cfg := ConfigFile.new()
+	return cfg.load(save_path) == OK and cfg.has_section_key("kosu", "oyun")
+
+
+func saved_run() -> Dictionary:
+	var cfg := ConfigFile.new()
+	if cfg.load(save_path) != OK or not cfg.has_section_key("kosu", "oyun"):
+		return {}
+	return {"oyun": cfg.get_value("kosu", "oyun", {}), "oyuncu": cfg.get_value("kosu", "oyuncu", {})}
+
+
+## Koşuyu kayıttan geri yükler (oyuncu ayrıca main tarafında).
+func restore_run(run: Dictionary) -> void:
+	new_run(run.get("style", "warrior"))
+	for k in RUN_KEYS:
+		if run.has(k):
+			set(k, run[k])
+	changed.emit()
+
+
+func clear_run() -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(save_path) != OK:
+		return
+	if cfg.has_section("kosu"):
+		cfg.erase_section("kosu")
+		cfg.save(save_path)
 
 
 func load_save() -> void:

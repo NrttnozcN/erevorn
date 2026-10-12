@@ -138,6 +138,7 @@ func start_run(style: String) -> void:
 	state = "playing"
 	light_rect.visible = true
 	hud.visible = true
+	Game.save_run(player)
 	later(72, func(): dialogue.trigger("zone_entry", 1))
 	later(150, _controls_hint)
 	Log.add("Maceraya başlandı! Zindan Katı: 1")
@@ -385,11 +386,44 @@ func spawn_minions(b: Boss, count: int) -> void:
 			e.is_minion = true
 
 
+## Kayıtlı koşuyu kaldığı katın başından sürdürür.
+func continue_run() -> void:
+	var saved := Game.saved_run()
+	if saved.is_empty():
+		return
+	screens.close()
+	Sfx.music("")
+	Game.restore_run(saved.oyun)
+	dialogue.reset()
+	Log.clear()
+	_delayed.clear()
+	if player:
+		player.queue_free()
+	player = Player.new()
+	player.main = self
+	player.setup(Game.style)
+	for k in Game.PLAYER_KEYS:
+		if saved.oyuncu.has(k):
+			player.set(k, saved.oyuncu[k])
+	player.leveled_up.connect(_on_level_up)
+	player.died.connect(_on_player_died)
+	entities.add_child(player)
+	player.add_child(Atmosphere.make_player_light())
+	tutorial_step = -1
+	_build_floor()
+	state = "playing"
+	light_rect.visible = true
+	hud.visible = true
+	hud.refresh()
+	Log.add("Kaldığın yerden: Zindan Katı %d. %s" % [Game.floor_number, EnemyData.ZONE_NAMES[Game.zone() - 1]], "level")
+
+
 func next_floor() -> void:
 	Game.quest_event("floor_cleared")
 	var old_zone := Game.zone()
 	Game.floor_number += 1
 	_build_floor()
+	Game.save_run(player)
 	shake(15)
 	_portal_arrival()
 	Log.add("Zindan Katı %d. %s" % [Game.floor_number, EnemyData.ZONE_NAMES[Game.zone() - 1]])
@@ -936,6 +970,7 @@ func _on_player_died() -> void:
 	else:
 		var stones := Game.soul_stone_reward()
 		Game.soul_stones += stones
+		Game.clear_run()
 		Game.save()
 		state = "gameover"
 		screens.show_game_over(stones)
@@ -995,8 +1030,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Geliştirici kısayolları; arayüzde hiçbir yerde görünmez.
 func _secret_keys(event: InputEvent) -> bool:
-	if not OS.is_debug_build():
-		return false
 	if not (event is InputEventKey and event.pressed and not event.echo and event.ctrl_pressed and event.shift_pressed):
 		return false
 	match event.keycode:
@@ -1174,6 +1207,7 @@ func resolve_ending(choice: String) -> void:
 	if state != "ending_choice":
 		return
 	state = "ending"
+	Game.clear_run()
 	var stones := 0
 	match choice:
 		"light": stones = 350 + int(Game.kills * 0.5) + Game.run_rescues * 20

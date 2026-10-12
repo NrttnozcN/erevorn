@@ -17,7 +17,7 @@ var overlay: HudOverlay
 
 var floor_label: Label
 var gold_label: Label
-var hearts_label: Label
+var hearts_label: Hearts
 var boss_box: VBoxContainer
 var boss_name: Label
 var boss_bar: ProgressBar
@@ -115,7 +115,8 @@ func _build_top() -> void:
 	floor_label = _badge(row, "ZİNDAN: 1", UiKit.CYAN)
 	_full_only.append(floor_label.get_parent())
 	gold_label = _badge(row, "0", UiKit.GOLD)
-	hearts_label = UiKit.label("♥♥♥", 16, false, Color("ff3b5c"))
+	hearts_label = Hearts.new()
+	hearts_label.set_lives(3, 3)
 	row.add_child(hearts_label)
 	var spacer2 := Control.new()
 	spacer2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -320,10 +321,10 @@ func _build_bottom() -> void:
 	tools.alignment = BoxContainer.ALIGNMENT_CENTER
 	tools.add_theme_constant_override("separation", 8)
 	bv.add_child(tools)
-	var forge := UiKit.button("⚒ DEMİRCİ", 8, UiKit.GOLD)
+	var forge := UiKit.button("DEMİRCİ", 8, UiKit.GOLD)
 	forge.pressed.connect(func(): main.screens.show_forge())
 	tools.add_child(forge)
-	var meta := UiKit.button("⇅ SIRALA", 8, UiKit.TEXT_DIM)
+	var meta := UiKit.button("SIRALA", 8, UiKit.TEXT_DIM)
 	meta.pressed.connect(sort_bag)
 	tools.add_child(meta)
 
@@ -397,10 +398,7 @@ func refresh() -> void:
 		return
 	floor_label.text = "ZİNDAN: %d" % Game.floor_number
 	gold_label.text = str(Game.gold)
-	var h := ""
-	for i in maxi(3, Game.max_lives):
-		h += "♥" if i < Game.lives else "♡"
-	hearts_label.text = h
+	hearts_label.set_lives(Game.lives, maxi(3, Game.max_lives))
 	avatar.texture = Sprites.tex(Game.style + "_idle1")
 	refresh_bag()
 
@@ -418,20 +416,20 @@ func _process(_delta: float) -> void:
 	level_label.text = "LVL %d" % p.level
 	title_label.text = Game.title()
 	var d := ""
-	if p.burn > 0: d += " 🔥%d" % ceili(p.burn / 60.0)
-	if p.poison > 0: d += " ☠%d" % ceili(p.poison / 60.0)
-	if p.slow > 0: d += " 🐢%d" % ceili(p.slow / 60.0)
-	if p.frozen > 0: d += " ❄DONDU"
-	elif p.frost > 0: d += " ❄%d/%d" % [p.frost, Player.FROST_MAX]
-	if p.rooted > 0: d += " ⌇KÖK"
-	if p.void_burn > 0: d += " ✶YOKLUK %d" % ceili(p.void_burn / 60.0)
-	if p.blood_mark > 0: d += " ✚İŞARET"
-	if p.heavy > 0: d += " ⊙AĞIR"
-	if p.warp > 0: d += " ⇄ÇARPIK"
-	if p.crystal > 0: d += " ◆KRİSTAL %d" % p.crystal
-	if p.shrine_left > 0: d += " ✦%d" % ceili(p.shrine_left / 60.0)
-	if p.speed_potion > 0: d += " ⚡%d" % ceili(p.speed_potion / 60.0)
-	debuff_label.text = d
+	if p.burn > 0: d += " YANIK %d ·" % ceili(p.burn / 60.0)
+	if p.poison > 0: d += " ZEHİR %d ·" % ceili(p.poison / 60.0)
+	if p.slow > 0: d += " YAVAŞ %d ·" % ceili(p.slow / 60.0)
+	if p.frozen > 0: d += " DONDU ·"
+	elif p.frost > 0: d += " BUZ %d/%d ·" % [p.frost, Player.FROST_MAX]
+	if p.rooted > 0: d += " KÖK ·"
+	if p.void_burn > 0: d += " YOKLUK %d ·" % ceili(p.void_burn / 60.0)
+	if p.blood_mark > 0: d += " KAN İŞARETİ ·"
+	if p.heavy > 0: d += " AĞIR ·"
+	if p.warp > 0: d += " ÇARPIK ·"
+	if p.crystal > 0: d += " KRİSTAL %d ·" % p.crystal
+	if p.shrine_left > 0: d += " SUNAK %d ·" % ceili(p.shrine_left / 60.0)
+	if p.speed_potion > 0: d += " HIZ %d ·" % ceili(p.speed_potion / 60.0)
+	debuff_label.text = d.trim_suffix(" ·")
 	stat_labels.atk.text = str(p.total_atk())
 	stat_labels.def.text = str(p.total_def())
 	stat_labels.spd.text = "%.1f" % p.total_spd()
@@ -447,7 +445,7 @@ func _process(_delta: float) -> void:
 		potion_boxes[pk].set_count(p.potion_count(potion_boxes[pk].type))
 	var b := main.boss
 	if b and is_instance_valid(b):
-		boss_name.text = "☠ " + b.display_name + ("" if b.phase == 1 else " — FAZ %d" % b.phase)
+		boss_name.text = b.display_name + ("" if b.phase == 1 else " — FAZ %d" % b.phase)
 		boss_bar.max_value = b.max_hp
 		boss_bar.value = maxi(0, b.hp)
 		(boss_bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Boss.PHASE_COLORS[b.phase - 1]
