@@ -2554,7 +2554,8 @@ func _nihil_phase(n: int) -> void:
 func _nihil_rest() -> void:
 	main.fx.add_sprite(position + Vector2(0, -NH_FLOAT), "fx_rift_debris", 160.0, Color.WHITE, 40, 0.4)
 	main.burst(position + Vector2(0, -NH_FLOAT), 140, NH_CYAN)
-	main.later(60, func(): main.float_text(main.player.position + Vector2(0, -90), "KÂRUN: \"...Onu durdurdun. Bu, aramızdaki hesabı değiştirmiyor.\"", Color(0.8, 0.55, 1.0)))
+	# Boss bu sırada silinir; söz bossa değil main'e bağlı olsun.
+	main.later(60, main.float_text.bind(main.player.position + Vector2(0, -90), "KÂRUN: \"...Onu durdurdun. Bu, aramızdaki hesabı değiştirmiyor.\"", Color(0.8, 0.55, 1.0)))
 
 
 func _nh_key() -> String:

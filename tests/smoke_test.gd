@@ -8,6 +8,7 @@ var errors: Array = []
 
 
 func _ready() -> void:
+	DeathCinematic.enabled = false
 	Game.save_path = "user://test_kayit.cfg"
 	main = load("res://scenes/main.tscn").instantiate()
 	add_child(main)

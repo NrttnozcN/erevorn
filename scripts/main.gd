@@ -44,6 +44,10 @@ var aim_override := false
 var combat_bonus := 0.0
 var shake_amt := 0.0
 var freeze := 0
+## Boss ölüm sinematiği: ağır çekim, kamera odağı ve yakınlaşma payı (DeathCinematic yönetir).
+var cine_slow := false
+var cine_focus := Vector2.ZERO
+var cine_zoom := 0.0
 var crit_flash := 0
 var respawn_timer := 0
 var low_hp_timer := 0
@@ -411,6 +415,16 @@ func _physics_process(_delta: float) -> void:
 	if state == "playing" and freeze > 0:
 		# Vuruş donması: darbe anında dünya birkaç kare durur, vuruş "tok" hissettirir.
 		freeze -= 1
+	elif state == "cinematic":
+		# Ağır çekimde dünya üç karede bir ilerler; tablo ekrandayken tamamen durur.
+		if cine_slow and Engine.get_physics_frames() % 3 == 0:
+			for e in enemies.duplicate():
+				if is_instance_valid(e) and not e.removed:
+					e.tick()
+			for o in others.duplicate():
+				if is_instance_valid(o) and not o.removed:
+					o.tick()
+			_cleanup()
 	elif state == "playing":
 		dialogue.update(1000.0 / 60.0)
 		player.tick()
@@ -497,10 +511,14 @@ func _update_camera() -> void:
 	var crit := sin(crit_flash / 8.0 * PI) * 0.06 if crit_flash > 0 else 0.0
 	if crit_flash > 0:
 		crit_flash -= 1
-	var z := BASE_ZOOM + COMBAT_ZOOM * combat_bonus + crit
+	var z := BASE_ZOOM + COMBAT_ZOOM * combat_bonus + crit + cine_zoom
 	camera.zoom = Vector2(z, z)
 	var lerp_k: float = ClassData.STYLES[Game.style].camera_lerp
-	camera.position += (player.position - camera.position) * lerp_k
+	var aim := player.position
+	if cine_zoom > 0.0:
+		aim = cine_focus + Vector2(0, -60)
+		lerp_k = 0.08
+	camera.position += (aim - camera.position) * lerp_k
 	var half := get_viewport_rect().size / (2.0 * z)
 	var size := world.pixel_size()
 	camera.position.x = clampf(camera.position.x, half.x, maxf(half.x, size.x - half.x)) if size.x > half.x * 2 else size.x / 2
@@ -555,7 +573,7 @@ func later(frames: int, fn: Callable) -> void:
 
 
 func _run_delayed() -> void:
-	if _delayed.is_empty() or state == "start":
+	if _delayed.is_empty() or state == "start" or state == "cinematic":
 		return
 	var due: Array = []
 	for d in _delayed:
@@ -564,7 +582,9 @@ func _run_delayed() -> void:
 			due.append(d)
 	for d in due:
 		_delayed.erase(d)
-		d[1].call()
+		# Sahibi silinmiş bir nesneye bağlı iş (ör. ölen bossun lambdası) sessizce düşer.
+		if (d[1] as Callable).is_valid():
+			d[1].call()
 
 
 # ── Yardımcılar (nesnelerin çağırdığı) ───────────────────────────────
@@ -826,15 +846,45 @@ func on_boss_killed(b: Boss) -> void:
 	hud.show_boss(false)
 	if Game.floor_number < 100:
 		portal.active = true
-	if b.is_karun:
-		later(120, func(): screens.show_ending_choice())
+	var was_karun := b.is_karun
+	var after := func():
+		if was_karun:
+			later(60, func(): screens.show_ending_choice())
+		elif Game.floor_number >= 100:
+			later(48, _spawn_karun)
+		else:
+			dialogue.trigger("boss_post", Game.zone(), true)
+			if Game.bosses_killed == 1:
+				dialogue.event("first_boss_kill")
+	var key := DeathCinematic.key_for(b, Game.zone()) if DeathCinematic.enabled else ""
+	if key == "":
+		after.call()
 		return
-	if Game.floor_number >= 100:
-		later(108, _spawn_karun)
-		return
-	dialogue.trigger("boss_post", Game.zone(), true)
-	if Game.bosses_killed == 1:
-		dialogue.event("first_boss_kill")
+	_start_cinematic(key, b, pos, after)
+
+
+## Boss ölüm sinematiği: dünya ağır çekime girer, arayüz gizlenir; DeathCinematic tablo sahnesini oynatır.
+func _start_cinematic(key: String, b: Boss, pos: Vector2, after: Callable) -> void:
+	state = "cinematic"
+	cine_slow = true
+	cine_focus = pos
+	hud.visible = false
+	dialogue.stop_voices()
+	var c := DeathCinematic.new()
+	c.main = self
+	c.key = key
+	c.title = EnemyData.KARUN_NAME.get_slice(" — ", 0) if b.is_karun else b.display_name.get_slice(" — ", 0)
+	c.focus = pos
+	c.done = after
+	add_child(c)
+
+
+func end_cinematic() -> void:
+	cine_slow = false
+	cine_zoom = 0.0
+	if state == "cinematic":
+		state = "playing"
+	hud.visible = true
 
 
 func _spawn_karun() -> void:
