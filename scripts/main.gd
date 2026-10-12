@@ -1038,6 +1038,13 @@ func _secret_keys(event: InputEvent) -> bool:
 		KEY_G:
 			player.god_mode = not player.god_mode
 			hud.toast("+" if player.god_mode else "-")
+		KEY_B:
+			# Bossu bitirir (ölüm sinematiğini denemek için).
+			if boss and is_instance_valid(boss) and not boss.removed:
+				for i in 20:
+					if not is_instance_valid(boss) or boss.removed or boss.hp <= 0:
+						break
+					boss.take_damage(9999999)
 		_:
 			return false
 	get_viewport().set_input_as_handled()
@@ -1075,6 +1082,8 @@ func _on_jump_submitted(text: String) -> void:
 func goto_floor(n: int) -> void:
 	Game.floor_number = n
 	_build_floor()
+	if player:
+		Game.save_run(player)
 	_portal_arrival()
 	Log.add("Zindan Katı %d. %s" % [n, EnemyData.ZONE_NAMES[Game.zone() - 1]])
 
