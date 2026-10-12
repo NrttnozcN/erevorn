@@ -275,6 +275,9 @@ func _continue() -> void:
 func _toggle_fullscreen() -> void:
 	var w := get_window()
 	w.mode = Window.MODE_WINDOWED if w.mode == Window.MODE_FULLSCREEN else Window.MODE_FULLSCREEN
+	if OS.has_feature("web") and w.mode == Window.MODE_FULLSCREEN:
+		# Telefonda tam ekranda yatayda kilitle (Android tarayıcıları destekler; desteklemeyen sessizce geçer).
+		JavaScriptBridge.eval("try { screen.orientation.lock('landscape').catch(function(){}); } catch (e) {}")
 
 
 # ── Seviye atlama ────────────────────────────────────────────────────

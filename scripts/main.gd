@@ -59,7 +59,26 @@ var _delayed: Array = []
 var _jump_box: LineEdit
 
 
+## Dokunmatik cihaz mı (telefon / tablet; web'de mobil tarayıcı).
+static func is_touch_device() -> bool:
+	return DisplayServer.is_touchscreen_available() or OS.has_feature("mobile") \
+		or OS.has_feature("web_android") or OS.has_feature("web_ios")
+
+
+## Telefonda arayüz ve yazılar küçük kalmasın: taban çözünürlük 1280x720 yerine 960x540 (her şey ~%33 büyük).
+var touch_layout := false
+
+
+func use_touch_layout() -> void:
+	touch_layout = true
+	get_tree().root.content_scale_size = Vector2i(960, 540)
+
+
 func _ready() -> void:
+	if is_touch_device():
+		use_touch_layout()
+	var rot := RotateHint.new()
+	add_child(rot)
 	world = World.new()
 	add_child(world)
 	atmosphere = Atmosphere.new()

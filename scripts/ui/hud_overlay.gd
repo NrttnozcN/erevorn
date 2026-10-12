@@ -170,13 +170,22 @@ func _draw_minimap(r: Rect2) -> void:
 	draw_string(UiKit.PIXEL, Vector2(r.position.x + 50, ly), "O", HORIZONTAL_ALIGNMENT_LEFT, -1, 7, UiKit.PURPLE)
 
 
+## Son çizilen konuşma kutusu (dokunmatikte kutuya dokununca metin ilerler).
+var dialogue_rect := Rect2()
+
+
 func _draw_dialogue() -> void:
 	var d := hud.main.dialogue
 	if not d.is_open():
+		dialogue_rect = Rect2()
 		return
 	var info := d.speaker_info()
 	var vs := size
 	var r := Rect2(270, vs.y - Hud.BOTTOM_H - 140, vs.x - 270 - Hud.LOG_W - 20, 120)
+	if hud.main.touch_layout:
+		# Telefonda sağdaki dokunmatik düğmelere değmesin.
+		r.size.x = vs.x - 270 - 410
+	dialogue_rect = r
 	var border := Color(info.border)
 	draw_rect(r, Color(0.02, 0.02, 0.05, 0.95))
 	draw_rect(r, border, false, 2)
