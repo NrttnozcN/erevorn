@@ -38,11 +38,13 @@ func _ready() -> void:
 	_check(Game.has_run(), "yeniden açılışta yarım koşu var")
 	_check(int(Game.saved_run().oyun.floor_number) == 24, "kayıtlı kat 24")
 	main.continue_run()
+	# Altın hemen ölçülür: kat kurulunca yakındaki altın toplanabilir (test titrememesi için).
+	var gold_now := Game.gold
 	await _wait(10)
 	_check(main.state == "playing", "devam edildi")
 	_check(Game.floor_number == 24, "kat 24 (%d)" % Game.floor_number)
 	_check(Game.style == "mage" and main.player.style == "mage", "dövüş tarzı büyücü")
-	_check(Game.gold == 777, "altın 777 (%d)" % Game.gold)
+	_check(gold_now == 777, "altın 777 (%d)" % gold_now)
 	_check(main.player.level == 9 and main.player.base.atk == 99, "oyuncu seviyesi ve gücü geri geldi")
 	_check(main.player.inventory.size() == bag, "çanta geri geldi")
 	_check(main.boss == null and not main.enemies.is_empty(), "kat yeniden kuruldu")

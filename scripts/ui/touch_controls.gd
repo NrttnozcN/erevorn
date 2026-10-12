@@ -26,6 +26,8 @@ func _layout() -> void:
 		"q": [Vector2(vs.x - 230, vs.y - 270), 34.0, "Q"],
 		"r": [Vector2(vs.x - 200, vs.y - 350), 34.0, "R"],
 		"e": [Vector2(vs.x - 100, vs.y - 350), 34.0, "E"],
+		"f": [Vector2(vs.x - 300, vs.y - 330), 30.0, "F"],
+		"v": [Vector2(vs.x - 290, vs.y - 420), 30.0, "T"],
 		"dash": [Vector2(vs.x - 240, vs.y - 180), 34.0, "ATIL"],
 	}
 
@@ -73,6 +75,12 @@ func _press(k: String, index: int) -> void:
 		"r":
 			_aim_nearest()
 			main.touch_r = true
+		"f":
+			_aim_nearest()
+			main.touch_f = true
+		"v":
+			_aim_nearest()
+			main.touch_v = true
 		"e":
 			if main.dialogue.waiting_for_input():
 				main.dialogue.advance()

@@ -20,11 +20,13 @@ Godot'da `project.godot` dosyasını aç ve F5'e bas.
 | Sol tık (basılı tut) | Temel saldırı (fareye doğru) |
 | Boşluk | Atılma (kısa süre hasar almaz) |
 | Q / R | Dövüş tarzının tek hedef / alan yeteneği |
-| E | Sandık, sunak, tutsak, satıcı, portal; konuşmayı ilerletir |
+| E | Sandık, sunak, tutsak, satıcı, portal; konuşmayı ilerletir (konuşma yalnızca E ile geçer) |
+| F | Üçüncü yetenek (ilk bossu yenince açılır) |
+| T | Gök Börü yeteneği (üçüncü bossu yenince açılır) |
 | I veya B | Çanta |
 | Esc | Duraklat / pencereyi kapat |
 
-Dokunmatik ekranda joystick ve SALDIRI / Q / R / E / ATIL düğmeleri çıkar.
+Dokunmatik ekranda joystick ve SALDIRI / Q / R / F / T / E / ATIL düğmeleri çıkar.
 
 ## Dövüş tarzları
 

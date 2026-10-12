@@ -13,6 +13,10 @@ var pierce_left := 0
 var hits := {}
 var arrow_key := "projectile_arrow_common"
 var tint := Color.WHITE
+## Görsel yükseklik: mermi silahın ucundan (yay, avuç) çıkar, kısa sürede hedef gövdesi hizasına iner.
+## Çarpışma yer düzleminde (position) hesaplanır; yükseklik yalnızca çizimdir.
+var lift := 0.0
+const FLIGHT_LIFT := 22.0
 ## Buz aynası kabuğundan yansıyan mermi: oyuncuya döner, yarı hasar verir.
 var reflected := false
 const UNSHADED := preload("res://scripts/world/unshaded.tres")
@@ -42,6 +46,7 @@ func setup(p_kind: String, angle: float, p_damage: int, p_crit: bool) -> void:
 
 
 func tick() -> void:
+	lift = move_toward(lift, FLIGHT_LIFT, 2.5)
 	position += dir * speed
 	life -= 1
 	if life <= 0 or not main.world.is_walkable(position):
@@ -152,9 +157,10 @@ func _explode(direct: Node2D) -> void:
 
 func _draw() -> void:
 	var a := dir.angle()
+	var up := Vector2(0, -lift)
 	match kind:
 		"arrow", "piercing":
-			draw_set_transform(Vector2.ZERO, a)
+			draw_set_transform(up, a)
 			if kind == "piercing":
 				if Sprites.tex("fx_trail_wind"):
 					Sprites.draw_flat(self, "fx_trail_wind", Rect2(-78, -15, 78, 30), Color(1, 1, 1, 0.9))
@@ -169,7 +175,7 @@ func _draw() -> void:
 			draw_set_transform(Vector2.ZERO)
 		"spell":
 			if Sprites.tex("fx_orb_w"):
-				draw_set_transform(Vector2.ZERO, a)
+				draw_set_transform(up, a)
 				Sprites.draw_flat(self, "fx_orb_w", Rect2(-66, -20, 80, 30), tint)
 				draw_circle(Vector2(1, 0), 4, Color(1, 1, 1, 0.7))
 				draw_set_transform(Vector2.ZERO)
@@ -178,7 +184,7 @@ func _draw() -> void:
 				draw_circle(Vector2.ZERO, 5, Color(0.85, 0.65, 1.0))
 				draw_line(Vector2.ZERO, -dir * 18, Color(0.6, 0.3, 1.0, 0.5), 3)
 		"fireball" when Sprites.tex("fx_fireball") != null:
-			draw_set_transform(Vector2.ZERO, a)
+			draw_set_transform(up, a)
 			var pulse := 1.0 + 0.06 * sin(Time.get_ticks_msec() / 60.0)
 			Sprites.draw_flat(self, "fx_fireball", Rect2(-80 * pulse, -18 * pulse, 96 * pulse, 36 * pulse))
 			draw_set_transform(Vector2.ZERO)

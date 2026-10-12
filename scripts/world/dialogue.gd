@@ -56,7 +56,7 @@ func _play_next_seq() -> void:
 		var s := voice_stream(_seq.pop_front())
 		if s and not Sfx.muted:
 			_voice.stream = s
-			_voice.volume_db = linear_to_db(maxf(Sfx.volume, 0.05))
+			_voice.volume_db = Sfx.voice_db()
 			_voice.play()
 			return
 
@@ -94,28 +94,40 @@ func trigger(group: String, key, auto := false) -> void:
 	_enqueue(lines, auto)
 
 
-## Olay satırları (ilk öldürme, düşük can...). Aynı olay 22 sn içinde tekrarlanmaz.
+## Olay satırları (ilk öldürme, düşük can...). "once" olanlar koşuda bir kez; tekrarlananlar (düşük can) katta
+## en fazla bir kez ve 22 sn içinde bir daha çalmaz; aynı ses kulak tırmalamasın.
 func event(key: String, once := true) -> void:
 	var now := Time.get_ticks_msec()
 	if cooldown.has(key) and now - cooldown[key] < 22000:
 		return
-	if once and Game.triggered.has("event:" + key):
+	var tag := "event:" + key if once else "event:%s:%d" % [key, Game.floor_number]
+	if Game.triggered.has(tag):
 		return
 	var lines = data.events.get(key)
 	if lines == null:
 		return
 	cooldown[key] = now
-	Game.triggered["event:" + key] = true
+	Game.triggered[tag] = true
 	_enqueue(lines, true)
 
 
+## Seviye atlayınca tarzına göre bir fısıltı: her satır koşuda yalnızca bir kez (Kârun'un sözü tekrar etmesin).
 func class_whisper(style: String) -> void:
 	var key := "level_up_" + style
 	var now := Time.get_ticks_msec()
 	if cooldown.has(key) and now - cooldown[key] < 8000:
 		return
+	var lines: Array = data.events.get(key, [])
+	var unused := []
+	for i in lines.size():
+		if not Game.triggered.has("whisper:%s:%d" % [style, i]):
+			unused.append(i)
+	if unused.is_empty():
+		return
+	var pick: int = unused.pick_random()
+	Game.triggered["whisper:%s:%d" % [style, pick]] = true
 	cooldown[key] = now
-	_enqueue([data.events[key].pick_random()], true)
+	_enqueue([lines[pick]], true)
 
 
 func npc(type: String) -> void:
@@ -142,7 +154,7 @@ func _next() -> void:
 		var s := voice_stream(current.voice)
 		if s:
 			_voice.stream = s
-			_voice.volume_db = linear_to_db(maxf(Sfx.volume, 0.05))
+			_voice.volume_db = Sfx.voice_db()
 			_voice.play()
 
 

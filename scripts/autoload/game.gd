@@ -183,7 +183,7 @@ func save() -> void:
 ## Yarım kalan koşu: her kata girişte yazılır, "DEVAM ET" o katın başından sürdürür.
 const RUN_KEYS := ["style", "floor_number", "gold", "lives", "max_lives", "kills", "run_rescues", "training_purchases",
 	"barter", "lifesteal_upgrade", "bosses_killed", "quests_completed", "quest", "triggered", "sera_bound"]
-const PLAYER_KEYS := ["base", "hp", "level", "xp", "next_xp", "equipment", "inventory", "attack_cd_base", "dash_cd_max", "perm"]
+const PLAYER_KEYS := ["base", "hp", "level", "xp", "next_xp", "equipment", "inventory", "attack_cd_base", "dash_cd_max", "perm", "full_power"]
 
 
 func save_run(p: Node) -> void:
@@ -246,7 +246,7 @@ func _register_input() -> void:
 	var keys := {
 		"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT],
 		"move_up": [KEY_W, KEY_UP], "move_down": [KEY_S, KEY_DOWN],
-		"dash": [KEY_SPACE], "interact": [KEY_E], "skill_q": [KEY_Q], "skill_r": [KEY_R],
+		"dash": [KEY_SPACE], "interact": [KEY_E], "skill_q": [KEY_Q], "skill_r": [KEY_R], "skill_f": [KEY_F], "skill_t": [KEY_T],
 		"bag": [KEY_I, KEY_B], "potion_1": [KEY_1, KEY_KP_1], "potion_2": [KEY_2, KEY_KP_2], "confirm": [KEY_ENTER, KEY_KP_ENTER], "cancel": [KEY_ESCAPE],
 	}
 	for action: String in keys:

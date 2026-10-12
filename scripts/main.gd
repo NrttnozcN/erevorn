@@ -38,6 +38,8 @@ var touch_move := Vector2.ZERO
 var touch_attack := false
 var touch_q := false
 var touch_r := false
+var touch_f := false
+var touch_v := false
 var touch_aim := Vector2.ZERO
 var aim_override := false
 
@@ -477,6 +479,8 @@ func _physics_process(_delta: float) -> void:
 		_tutorial()
 		touch_q = false
 		touch_r = false
+		touch_f = false
+		touch_v = false
 	if player and state != "start":
 		_update_camera()
 		fx.tick()
@@ -675,11 +679,12 @@ func make_noise(at: Vector2) -> void:
 	noise_frame = Engine.get_physics_frames()
 
 
-func spawn_projectile(kind: String, pos: Vector2, angle: float, damage: int, crit: bool) -> void:
+func spawn_projectile(kind: String, pos: Vector2, angle: float, damage: int, crit: bool, lift := 0.0) -> void:
 	make_noise(pos)
 	var pr := Projectile.new()
 	pr.main = self
 	pr.position = pos
+	pr.lift = lift
 	entities.add_child(pr)
 	pr.setup(kind, angle, damage, crit)
 	others.append(pr)
@@ -881,7 +886,11 @@ func on_boss_killed(b: Boss) -> void:
 	if Game.floor_number < 100:
 		portal.active = true
 	var was_karun := b.is_karun
+	# 3. ve 6. boss: Arktan'ın zırhı dönüşür (Mühür / Gök Nöbetçisi).
+	var stage_up := Game.bosses_killed == 3 or Game.bosses_killed == 6
 	var after := func():
+		if stage_up and player:
+			player.stage_up()
 		if was_karun:
 			later(60, func(): screens.show_ending_choice())
 		elif Game.floor_number >= 100:
@@ -1005,9 +1014,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if _secret_keys(event):
 		return
-	var advance: bool = event.is_action_pressed("interact") or event.is_action_pressed("confirm") or event.is_action_pressed("dash") \
-		or (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT)
-	if advance and dialogue.waiting_for_input():
+	# Konuşma yalnızca E ile ilerler: savaşta tıklama / boşluk hikâye metnini kaçırtmasın.
+	if event.is_action_pressed("interact") and dialogue.waiting_for_input():
 		dialogue.advance()
 		get_viewport().set_input_as_handled()
 		return
@@ -1038,6 +1046,8 @@ func _secret_keys(event: InputEvent) -> bool:
 		KEY_G:
 			player.god_mode = not player.god_mode
 			hud.toast("+" if player.god_mode else "-")
+		KEY_M:
+			_cheat_full()
 		KEY_B:
 			# Bossu bitirir (ölüm sinematiğini denemek için).
 			if boss and is_instance_valid(boss) and not boss.removed:
@@ -1049,6 +1059,58 @@ func _secret_keys(event: InputEvent) -> bool:
 			return false
 	get_viewport().set_input_as_handled()
 	return true
+
+
+## Geliştirici: tam güç. Seviye 20 (yetenek rütbesi V), yüksek statlar, bütün yuvalara taşlı Kızıl eşyalar,
+## F / T açık, Gök Nöbetçisi zırhı, iksir ve altın. Arayüzde görünmez (Ctrl+Shift+M).
+func _cheat_full() -> void:
+	var p := player
+	while p.level < 20:
+		p.level += 1
+		p._level_passive()
+	p.xp = 0
+	p.next_xp = int(100 * pow(1.3, p.level - 1))
+	p.base.atk += 40
+	p.base.def += 25
+	p.base.maxHp += 300
+	p.base.crit += 20
+	p.base.spd += 0.6
+	p.base.luck += 20
+	p.full_power = true
+	var weapon: String = {"warrior": "sword", "ranger": "bow", "mage": "staff"}[p.style]
+	var kinds := {"weapon": weapon, "armor": "shield" if p.style == "warrior" else "armor", "helmet": "helmet",
+		"necklace": "necklace", "earrings": "earrings", "ring": "ring", "gloves": "gloves", "boots": "boots"}
+	for slot: String in kinds:
+		var it := ItemData.make(kinds[slot] + "_legendary", false)
+		# Kızıl dövme (demircideki ile aynı artış) ve iki yuvaya taş.
+		it.rarity = "mythic"
+		it.name = "Kızıl " + it.name
+		it.socket_limit = 2
+		for k in [["atk", 6], ["def", 4], ["hp", 25], ["crit", 4]]:
+			it.stats[k[0]] = it.stats.get(k[0], 0) + k[1]
+		if slot == "weapon":
+			it.sockets = ["ruby", "sapphire"]
+			it.stats.atk = it.stats.get("atk", 0) + 3
+			it.stats.crit = it.stats.get("crit", 0) + 4
+		elif slot == "armor":
+			it.sockets = ["emerald", "obsidian"]
+			it.stats.hp = it.stats.get("hp", 0) + 18
+			it.stats.def = it.stats.get("def", 0) + 2
+		p.equipment[slot] = it
+	for potion in ["potion_red", "potion_blue"]:
+		var pt := ItemData.make(potion, false)
+		pt.count = 10
+		p.add_to_bag(pt)
+	Game.gold += 5000
+	p.hp = p.max_hp()
+	p.q_cd = 0
+	p.r_cd = 0
+	p.skills.f_cd = 0
+	p.skills.v_cd = 0
+	Sfx.play("forge")
+	burst(p.position + Vector2(0, -40), 120, ItemData.RARITY_COLORS.mythic)
+	hud.refresh()
+	Game.changed.emit()
 
 
 func _open_jump_box() -> void:

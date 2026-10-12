@@ -83,7 +83,8 @@ func _draw() -> void:
 		draw_texture_rect(Atmosphere.soft_texture(), Rect2(-fr, -fr, fr * 2.0, fr * 2.0), false, Color(1, 0.8, 0.5, 0.5 * a))
 		return
 	# Hedef halkası: yumuşak haleli, kenar yumuşatmalı (sert 2 px çember değil).
-	var ring := Color(1, 0.3, 0.2, 0.5) if kind == "meteor" else Color(0.6, 0.9, 1.0, 0.4)
+	# Ok yağmurunda çok sayıda ok iner: halkaları silik tut, ekran halkaya boğulmasın.
+	var ring := Color(1, 0.3, 0.2, 0.5) if kind == "meteor" else (Color(1.0, 0.9, 0.6, 0.14) if kind == "arrow" else Color(0.6, 0.9, 1.0, 0.4))
 	draw_arc(Vector2.ZERO, radius, 0, TAU, 96, Color(ring, ring.a * 0.25), 7.0, true)
 	draw_arc(Vector2.ZERO, radius, 0, TAU, 96, ring, 1.6, true)
 	if warn > 0:

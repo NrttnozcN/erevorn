@@ -988,6 +988,7 @@ func show_pause() -> void:
 	var parts := _center_card(Vector2(380, 0))
 	var v: VBoxContainer = parts[1]
 	_title(v, "DURAKLATILDI", UiKit.CYAN, 14)
+	_volume_sliders(v)
 	for b in [["DEVAM ET", close], ["TAM EKRAN", _toggle_fullscreen], ["ANA MENÜ", func():
 			close()
 			main.player.queue_free()
@@ -999,6 +1000,30 @@ func show_pause() -> void:
 		btn.pressed.connect(b[1])
 		v.add_child(btn)
 	_open("pause", parts[0], "pause")
+
+
+## Ses ayarları: genel, efekt, müzik, konuşma (0–100). Değişiklik anında duyulur ve kaydedilir.
+func _volume_sliders(v: VBoxContainer) -> void:
+	for row in [["GENEL SES", "volume"], ["EFEKTLER", "sfx_volume"], ["MÜZİK", "music_volume"], ["KONUŞMA", "voice_volume"]]:
+		var h := HBoxContainer.new()
+		var l := UiKit.label(row[0], 8, true, UiKit.TEXT_DIM)
+		l.custom_minimum_size = Vector2(120, 0)
+		h.add_child(l)
+		var sl := HSlider.new()
+		sl.min_value = 0
+		sl.max_value = 100
+		sl.step = 5
+		sl.value = Sfx.get(row[1]) * 100.0
+		sl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		sl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		sl.focus_mode = Control.FOCUS_NONE
+		var key: String = row[1]
+		sl.value_changed.connect(func(x: float):
+			Sfx.set_level(key, x / 100.0)
+			if key != "music_volume":
+				Sfx.play("item"))
+		h.add_child(sl)
+		v.add_child(h)
 
 
 func show_ending_choice() -> void:

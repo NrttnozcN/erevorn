@@ -280,9 +280,10 @@ func _build_bottom() -> void:
 	var sk := HBoxContainer.new()
 	sk.add_theme_constant_override("separation", 6)
 	ev.add_child(sk)
-	for key in ["q", "r"]:
+	for key in ["q", "r", "f", "v"]:
 		var box := SkillBox.new()
-		box.key = key.to_upper()
+		# Yeni yetenekler F ve T tuşlarında (iç adları f / v); E etkileşim.
+		box.key = {"q": "Q", "r": "R", "f": "F", "v": "T"}[key]
 		box.custom_minimum_size = Vector2(0, 28)
 		box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		sk.add_child(box)
@@ -439,8 +440,12 @@ func _process(_delta: float) -> void:
 		slot_buttons[s].item = p.equipment[s]
 		slot_buttons[s].queue_redraw()
 	var st: Dictionary = ClassData.STYLES[p.style]
-	skill_boxes.q.setup(st.q, p.q_cd, p.q_cd_max)
-	skill_boxes.r.setup(st.r, p.r_cd, p.r_cd_max)
+	var rk: String = HeroSkills.ROMAN[p.skills.rank()]
+	var nm: Dictionary = HeroSkills.NAMES[p.style]
+	skill_boxes.q.setup(st.q, p.q_cd, p.q_cd_max, rk)
+	skill_boxes.r.setup(st.r, p.r_cd, p.r_cd_max, rk)
+	skill_boxes.f.setup(nm.f if p.skills.f_unlocked() else "1. BOSS", p.skills.f_cd, p.skills.f_max(), rk, not p.skills.f_unlocked())
+	skill_boxes.v.setup(nm.v if p.skills.v_unlocked() else "3. BOSS", p.skills.v_cd, HeroSkills.V_CD, rk, not p.skills.v_unlocked())
 	for pk: String in potion_boxes:
 		potion_boxes[pk].set_count(p.potion_count(potion_boxes[pk].type))
 	var b := main.boss
@@ -496,11 +501,19 @@ class SkillBox extends Control:
 	var title := ""
 	var cd := 0
 	var cd_max := 1
+	var rank := ""
+	var locked := false
 
-	func setup(t: String, c: int, m: int) -> void:
+	func setup(t: String, c: int, m: int, r := "", lock := false) -> void:
+		if t == title and c == cd and r == rank and lock == locked:
+			return
 		title = t
+		# Dar kutuda ad sığmazsa yalnızca ipucunda görünür.
+		tooltip_text = t + ("  (rütbe %s)" % r if r != "" and not lock else "")
 		cd = c
 		cd_max = maxi(1, m)
+		rank = r
+		locked = lock
 		queue_redraw()
 
 	func _draw() -> void:
@@ -509,8 +522,17 @@ class SkillBox extends Control:
 		draw_rect(r, Color(0.85, 0.66, 0.35, 0.22), false, 1.0)
 		draw_rect(Rect2(6, 6, 16, 16), Color(0.25, 0.25, 0.32))
 		draw_string(UiKit.TITLE, Vector2(9, 20), key, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, UiKit.GOLD)
-		draw_string(UiKit.TITLE, Vector2(30, 20), title, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, UiKit.TEXT if cd == 0 else UiKit.TEXT_DIM)
-		if cd > 0:
+		var tc := UiKit.TEXT_DIM if locked or cd > 0 else UiKit.TEXT
+		for fs in [11, 9]:
+			if UiKit.TITLE.get_string_size(title, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x <= size.x - 56:
+				draw_string(UiKit.TITLE, Vector2(30, 19), title, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, tc)
+				break
+		if rank != "" and not locked and cd == 0:
+			# Rütbe (I–V): seviyeyle güçlenir.
+			draw_string(UiKit.TITLE, Vector2(size.x - 24, 20), rank, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(0.6, 0.85, 1.0))
+		if locked:
+			draw_rect(r, Color(0, 0, 0, 0.45))
+		elif cd > 0:
 			var k := float(cd) / cd_max
 			draw_rect(Rect2(0, 0, size.x * k, size.y), Color(0, 0, 0, 0.55))
 			var s := "%d" % ceili(cd / 60.0)

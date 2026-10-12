@@ -40,7 +40,7 @@ func add_slash(from: Vector2, to: Vector2) -> void:
 
 func add_afterimage(p: Player) -> void:
 	ghosts.append({"pos": p.position, "key": "%s_walk1" % p.style, "flip": p.facing_left,
-		"size": 48.0 * ClassData.STYLES[p.style].draw_scale, "life": 14})
+		"size": 48.0 * ClassData.STYLES[p.style].draw_scale, "life": 14, "hero": p.hero_key(), "scale": p.hero_scale()})
 
 
 func tick() -> void:
@@ -67,9 +67,17 @@ func _draw() -> void:
 		Sprites.draw_flat(self, sp.key, Rect2(-s / 2, -s / 2, s, s), c)
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 	for g in ghosts:
+		var gc := Color(0.3, 0.8, 1.0, g.life / 28.0)
+		if g.get("hero", "") != "":
+			# Boyalı kahraman karesinin mavi hayaleti (atılma / kurt hamlesi izi).
+			var tex := Sprites.tex(g.hero)
+			draw_set_transform(g.pos + Vector2(0, Player.HERO_FEET), 0, Vector2(-1.0 if g.flip else 1.0, 1.0))
+			var hs: float = g.scale
+			draw_texture_rect(tex, Rect2(-Player.HERO_ANCHOR * hs, Player.HERO_CANVAS * hs), false, gc)
+			draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+			continue
 		var s: float = g.size
-		Sprites.draw_actor(self, g.key, Rect2(g.pos.x - s / 2, g.pos.y - s / 2, s, s), g.flip, false, false,
-			Color(0.3, 0.8, 1.0, g.life / 28.0))
+		Sprites.draw_actor(self, g.key, Rect2(g.pos.x - s / 2, g.pos.y - s / 2, s, s), g.flip, false, false, gc)
 	for b in bursts:
 		# Koyu (duman / kül) patlamalar toplamalı katmanda görünmez: yumuşak koyu leke olarak burada çizilir.
 		var c: Color = b.color
