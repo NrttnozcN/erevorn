@@ -1,0 +1,71 @@
+# Her gönderimde oyunu derler: tarayıcı sürümü GitHub Pages'e, Windows/Mac zip'leri "son-surum" sürümüne gider.
+name: Derle ve yayınla
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: yayin
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  derle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Godot ve dışa aktarma şablonlarını indir
+        run: |
+          base=https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}-stable
+          curl -sSL -o godot.zip $base/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+          curl -sSL -o tpl.tpz $base/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip -q godot.zip && mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
+          dir=~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          mkdir -p $dir && unzip -q tpl.tpz && mv templates/* $dir/
+
+      - name: Kaynakları içe aktar
+        run: ./godot --headless --import || true
+
+      - name: Dışa aktar
+        run: |
+          mkdir -p build/web build/windows build/macos
+          ./godot --headless --export-release "Web" build/web/index.html
+          ./godot --headless --export-release "Windows" build/windows/Erevorn.exe
+          ./godot --headless --export-release "macOS" build/macos/Erevorn.zip
+          ls -la build/*
+          test -f build/web/index.html && test -f build/windows/Erevorn.exe && test -f build/macos/Erevorn.zip
+          (cd build/windows && zip -q ../Erevorn-Windows.zip Erevorn.exe)
+          cp build/macos/Erevorn.zip build/Erevorn-Mac.zip
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+      - name: İndirilebilir sürümü güncelle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete son-surum --yes --cleanup-tag || true
+          gh release create son-surum build/Erevorn-Windows.zip build/Erevorn-Mac.zip \
+            --title "Erevorn — son sürüm" \
+            --notes "Windows: zip'i aç, Erevorn.exe'yi çalıştır. Mac: zip'i aç, Erevorn'a sağ tık → Aç (imzasız uygulama uyarısı çıkar). Tarayıcıda oynamak için: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+  pages:
+    needs: derle
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

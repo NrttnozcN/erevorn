@@ -1,0 +1,38 @@
+; Engine configuration file.
+config_version=5
+
+[application]
+
+config/name="Erevorn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+run/main_scene="res://scenes/main.tscn"
+config/icon="res://icon.svg"
+
+[autoload]
+
+Game="*res://scripts/autoload/game.gd"
+Sprites="*res://scripts/autoload/sprites.gd"
+Log="*res://scripts/autoload/combat_log.gd"
+Sfx="*res://scripts/autoload/sfx.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom_font="res://assets/fonts/Outfit.ttf"
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.012, 0.012, 0.02, 1)
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

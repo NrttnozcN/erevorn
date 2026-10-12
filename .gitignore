@@ -1,0 +1,12 @@
+.godot/
+/android/
+
+# Depoya yalnızca oyunun kendisi gider: üretim klasörleri, yedekler, teaser kayıtları ve derlemeler dışarıda.
+/konsept/
+/_eski_gorseller/
+/_eski_prototip/
+/_aktarim/
+/assets/sounds/hikaye/
+/tools/
+/build/
+.DS_Store

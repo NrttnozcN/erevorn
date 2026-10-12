@@ -1,0 +1,978 @@
+{
+ "SPEAKERS": {
+  "SERA": {
+   "name": "SERA",
+   "color": "#00f0ff",
+   "bg": "rgba(0,18,36,0.97)",
+   "border": "#00f0ff"
+  },
+  "KARUN": {
+   "name": "KÂRUN",
+   "color": "#cc44ff",
+   "bg": "rgba(18,0,32,0.97)",
+   "border": "#b026ff"
+  },
+  "PEASANT": {
+   "name": "KÖYLÜ",
+   "color": "#ffd700",
+   "bg": "rgba(28,20,0,0.97)",
+   "border": "#ffd700"
+  },
+  "SOLDIER": {
+   "name": "ASKER",
+   "color": "#ff7755",
+   "bg": "rgba(32,8,0,0.97)",
+   "border": "#ff6644"
+  },
+  "MAGE_NPC": {
+   "name": "BÜYÜCÜ",
+   "color": "#bb88ff",
+   "bg": "rgba(18,4,36,0.97)",
+   "border": "#aa44ff"
+  },
+  "MERCHANT": {
+   "name": "TÜCCAR",
+   "color": "#ffbb33",
+   "bg": "rgba(28,18,0,0.97)",
+   "border": "#ffaa00"
+  },
+  "NARRATOR": {
+   "name": "· · ·",
+   "color": "#bbbbbb",
+   "bg": "rgba(4,4,14,0.97)",
+   "border": "#555577"
+  },
+  "BOSS": {
+   "name": "BOSS",
+   "color": "#ff4444",
+   "bg": "rgba(28,0,0,0.97)",
+   "border": "#ff3333"
+  }
+ },
+ "DIALOGUE_DATA": {
+  "zone_entry": {
+   "1": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Mühür Kuyusu. Göğün Nöbetçileri'nin eski dış kışlası. Başı kırık heykeller, rutubetli duvarlar; mor sisle yürüyen boş zırhlar.",
+     "voice": "anlatici_zone_entry_1_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Önce hayatta kal. Elinde kırık bir kılıç, hafızan silinmiş, neden burada olduğunu bilmiyorsun. Ama ben seni tanıyorum.",
+     "voice": "sera_zone_entry_1_2"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Kârun seni yakaladı ve hafızanı sildi. Hata yaptı: seni öldürmedi. Sesimi izle, nöbetçi. Aşağı in.",
+     "voice": "sera_zone_entry_1_3"
+    }
+   ],
+   "2": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Fısıltı Tünelleri. Mor kristallerin aydınlattığı mağaralar. Duvarlardaki gölgeler kıpırdıyor, fısıldıyor...",
+     "voice": "anlatici_zone_entry_2_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bu fısıltılar gerçek. Bir zamanlar kütüphanenin hizmetkârlarıydılar. Kârun ruhlarını söktü, geriye gölgeleri kaldı.",
+     "voice": "sera_zone_entry_2_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Kütüphanem kalabalıktı, nöbetçi. Şimdi sessiz. Bilgi bedel ister.",
+     "voice": "karun_zone_entry_2_3"
+    }
+   ],
+   "3": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Demir Kölelerinin Ocakları. Halat köprüler, asılı demir kafesler. Esir köylüler madende zorla çalıştırılıyor.",
+     "voice": "anlatici_zone_entry_3_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Goblin kabileleri mor sisle devleşti, köylüleri zincire vurdu. Esirleri gördüğünde kurtar, evlat. Onlar masum.",
+     "voice": "sera_zone_entry_3_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Sera sana köylülerden bahsediyor... Ne tatlı. Onları kurtarmak seni yavaşlatır, nöbetçi.",
+     "voice": "karun_zone_entry_3_3"
+    }
+   ],
+   "4": [
+    {
+     "speaker": "NARRATOR",
+     "text": "İlk Ocak. Nöbetçilerin mühür çeliğini dövdüğü lav ocakları. Bir zamanlar mavi yanan alevler şimdi mora dönmüş.",
+     "voice": "anlatici_zone_entry_4_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Kırık kılıcın burada dövüldü, evlat. Mühür çeliği. Ocağın sesini duyuyor musun? Seni tanıyor.",
+     "voice": "sera_zone_entry_4_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "İlk Ocak... Mühür çeliği kapıları kapatmak için yapıldı. Ben açtım. Gidişatın beni düşündürmeye başladı, nöbetçi.",
+     "voice": "karun_zone_entry_4_3"
+    }
+   ],
+   "5": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Ak Buz Kurganları. Buzun içinde donmuş savaşçı siluetleri. Tünellerde rüzgar uluyor.",
+     "voice": "anlatici_zone_entry_5_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Kârun'a en uzun direnen hükümdarın kurganları. Han son ana kadar savaştı, evlat. Bedelini hâlâ ödüyor.",
+     "voice": "sera_zone_entry_5_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Han'ı hatırlıyorum. Direnmek ona ne kazandırdı? Tahtına dondurdum. Dünya zaten ölüyor, nöbetçi.",
+     "voice": "karun_zone_entry_5_3"
+    }
+   ],
+   "6": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Ulu Kayın. Dünya ağacının kökleri tapınağın sütunlarını sarmış. Havada zehirli sporlar süzülüyor, kutsal pınarlar mor sisle kararmış.",
+     "voice": "anlatici_zone_entry_6_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Burası benim tapınağım... Yüz elli yıl önce son nefesimi burada verdim. Kökler hâlâ beni tutuyor, evlat. Yakındayız.",
+     "voice": "sera_zone_entry_6_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Sera seni mezarına çağırıyor, nöbetçi. Sence neden? Ölüler yalnız kalmak istemez.",
+     "voice": "karun_zone_entry_6_3"
+    }
+   ],
+   "7": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Valen'in Kara Zindanları. İmparatorluğun nöbetçilere işkence ettiği hücreler. Duvarlarda altın taç işareti, yerde kurumuş kan.",
+     "voice": "anlatici_zone_entry_7_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Artık kılıcının içindeyim, evlat. Gördüğünü görüyorum. Buradaki askerlerin zırhı derilerine kaynamış... Valen bizi bin yıldır avlıyor.",
+     "voice": "sera_zone_entry_7_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "İmparatorluk sizi sapık ilan etti, ben ise bilgi diye sakladım. Hangimiz daha merhametliydi, söyle bana.",
+     "voice": "karun_zone_entry_7_3"
+    }
+   ],
+   "8": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Gök Kurultayı. Nöbetçilerin doğduğu meclis. Havada asılı taş halkalar ve altın yazıtlarla dolu mermer salonlar.",
+     "voice": "anlatici_zone_entry_8_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Atalarımız ilk yeminlerini burada ettiler: Üstte sonsuz gök çökmedikçe, altta kara yer yarılmadıkça... Dikkatli ol. Hocaları hâlâ burada.",
+     "voice": "sera_zone_entry_8_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Kurultay... Ben de burada yemin ettim, biliyor muydun? Kütüphanenin son bekçisi olarak. Yeminler dünyayı kurtarmıyor, nöbetçi.",
+     "voice": "karun_zone_entry_8_3"
+    }
+   ],
+   "9": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kapının Ötesi. İlk Savaş'ta kapanan kapının ardında kalan diyar. Gerçeklik yırtılmış, geride bırakılan yoldaşların yankıları dolaşıyor.",
+     "voice": "anlatici_zone_entry_9_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bin yıl önce yoldaşlarımızı burada bıraktık. Yankılarını göreceksin, belki kendininkini de. Onları anlayarak geç, evlat.",
+     "voice": "sera_zone_entry_9_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Burası benim bile hükmedemediğim yer. Kapının ötesinde bir şey uyanıyor... ve o, Kalp'i benden önce yutmak istiyor.",
+     "voice": "karun_zone_entry_9_3"
+    }
+   ],
+   "10": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kara Taht. Kalp'in tam üzerine kurulmuş taht odası. Kızıl-altın damarlar zemini yakıyor; Kârun'un rün klonları nöbet tutuyor.",
+     "voice": "anlatici_zone_entry_10_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Kalp'i duyuyor musun? Hasta, öfkeli... Ona asla doğrudan dokunma. İlk Taşlar'ın en katı yasası bu, evlat.",
+     "voice": "sera_zone_entry_10_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Sonunda geldin, Sera'nın kanı. Sana tek bir şey söyleyeceğim, iyi dinle: Dünya zaten ölüyor.",
+     "voice": "karun_zone_entry_10_3"
+    }
+   ]
+  },
+  "floor_specific": {
+   "3": [
+    {
+     "speaker": "SERA",
+     "text": "Esirleri gördün mü? Kârun'un adamları masumları zincirlemiş. Onları kurtarırsan sen de güçlenirsin.",
+     "voice": "sera_floor_specific_3_1"
+    }
+   ],
+   "7": [
+    {
+     "speaker": "SERA",
+     "text": "Dikkat, evlat. Her bölgenin sonunda Kârun bir mühür bekçisi bırakmış. Hazırlıklı ol.",
+     "voice": "sera_floor_specific_7_1"
+    }
+   ],
+   "15": [
+    {
+     "speaker": "KARUN",
+     "text": "İkinci bölgeyi de geçtin. Neden bu kadar inat ediyorsun, nöbetçi?",
+     "voice": "karun_floor_specific_15_1"
+    }
+   ],
+   "18": [
+    {
+     "speaker": "SERA",
+     "text": "Tünellerin derinliğinde Kârun'un kitaplarının kokusunu alıyorum. Bir şey saklıyor.",
+     "voice": "sera_floor_specific_18_1"
+    }
+   ],
+   "25": [
+    {
+     "speaker": "KARUN",
+     "text": "Üç bölge... Belki seni hafife aldım. Atanda da bu inat vardı.",
+     "voice": "karun_floor_specific_25_1"
+    }
+   ],
+   "28": [
+    {
+     "speaker": "SERA",
+     "text": "İlk Ocak yakın. Kılıcının aslı orada dövüldü, evlat.",
+     "voice": "sera_floor_specific_28_1"
+    }
+   ],
+   "35": [
+    {
+     "speaker": "SERA",
+     "text": "Bu zindan seni değiştiriyor. Gördüğün anılar... sonunda anlayacaksın.",
+     "voice": "sera_floor_specific_35_1"
+    }
+   ],
+   "38": [
+    {
+     "speaker": "KARUN",
+     "text": "Yorulmadın mı? Ben seni izlemekten yoruldum. Artık ciddiye alıyorum.",
+     "voice": "karun_floor_specific_38_1"
+    }
+   ],
+   "47": [
+    {
+     "speaker": "SERA",
+     "text": "Evlat... Sana bir şey söylemeliyim. Ama önce mezarıma ulaşmalısın. Ulu Kayın'da anlatacağım.",
+     "voice": "sera_floor_specific_47_1"
+    }
+   ],
+   "53": [
+    {
+     "speaker": "SERA",
+     "text": "Kökler fısıldıyor... Bu ağaç benim kanımı içti, evlat. Beni tanıyor.",
+     "voice": "sera_floor_specific_53_1"
+    }
+   ],
+   "58": [
+    {
+     "speaker": "SERA",
+     "text": "Kutsal taşlar bir zamanlar gücümün kaynağıydı. Kârun onları kırdı. Işıklarını uyandır, sana yardım ederler.",
+     "voice": "sera_floor_specific_58_1"
+    }
+   ],
+   "65": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Duvarlara kazınmış isimler... Valen'in sorguladığı nöbetçilerin isimleri.",
+     "voice": "anlatici_floor_specific_65_1"
+    }
+   ],
+   "68": [
+    {
+     "speaker": "KARUN",
+     "text": "Bu isimleri okuyorsan bil: imparatorluk onları yaktı, ben ise kitaplarımda yaşattım.",
+     "voice": "karun_floor_specific_68_1"
+    }
+   ],
+   "73": [
+    {
+     "speaker": "SERA",
+     "text": "Atalarımız burada iki yol arasında seçim yaptı: güç mü, merhamet mi? Sen de seçeceksin, evlat.",
+     "voice": "sera_floor_specific_73_1"
+    }
+   ],
+   "77": [
+    {
+     "speaker": "KARUN",
+     "text": "Sera sana merhameti öğütlüyor. Merhamet, ölen bir dünyayı kurtarmaz.",
+     "voice": "karun_floor_specific_77_1"
+    }
+   ],
+   "87": [
+    {
+     "speaker": "SERA",
+     "text": "Neredeyse bitti, evlat. Kapının ardından sonra yalnızca Kalp kalıyor.",
+     "voice": "sera_floor_specific_87_1"
+    }
+   ],
+   "89": [
+    {
+     "speaker": "KARUN",
+     "text": "Son bölgeye yaklaşıyorsun. Seninle konuşacaklarım var. Kişisel şeyler.",
+     "voice": "karun_floor_specific_89_1"
+    }
+   ],
+   "95": [
+    {
+     "speaker": "SERA",
+     "text": "Kalp'in atışını kılıcımın içinden duyuyorum. Ne olursa olsun, bugün bu zindan biter.",
+     "voice": "sera_floor_specific_95_1"
+    }
+   ],
+   "98": [
+    {
+     "speaker": "KARUN",
+     "text": "Klonlarım seninle ilgilenecek. Ben bekliyorum. Bin yıldır bekliyorum.",
+     "voice": "karun_floor_specific_98_1"
+    }
+   ]
+  },
+  "boss_pre": {
+   "1": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kapının önünde, mor sisle devleşmiş bir nöbetçi. Göğsünde çatlak bir kurt mührü...",
+     "voice": "anlatici_boss_pre_1_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bu... İlk Savaş'ta kapının öbür tarafında bırakılan nöbetçi. Kurucunun kardeşi. Bin yıldır orada bekliyor.",
+     "voice": "sera_boss_pre_1_2"
+    },
+    {
+     "speaker": "NARRATOR",
+     "text": "Kardeş, Arktan'ın kanını tanıyor: \"Bizi kapıların önünde bıraktın.\"",
+     "voice": "anlatici_boss_pre_1_3"
+    }
+   ],
+   "2": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Gölgeler şekil alıyor. Yarı saydam bir figür kristallerin ışığını içine çekiyor...",
+     "voice": "anlatici_boss_pre_2_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Gölge Dokuyucu. Kârun'un çırağıydı. Ustasının ritüelinde bedeni eridi, şimdi gölgelerin kendisi.",
+     "voice": "sera_boss_pre_2_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Çırağım, misafirimize karanlığı öğret.",
+     "voice": "karun_boss_pre_2_3"
+    }
+   ],
+   "3": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kemik tahtta oturan dev bir figür. Adımları ocakların taşını sarsıyor.",
+     "voice": "anlatici_boss_pre_3_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Köle Efendisi. Benim için çalışmayı kabul eden ilk goblin şefi. Onu mor sisle besledim... ve işte bu oldu.",
+     "voice": "karun_boss_pre_3_2"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Kölelere zulmediyor! Esirleri kurtarmak için önce onu durdur, evlat.",
+     "voice": "sera_boss_pre_3_3"
+    }
+   ],
+   "4": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Zırhından lav damlıyor. Ocağın kapısında alevlere sarılmış bir figür...",
+     "voice": "anlatici_boss_pre_4_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Ateş Komutanı. Bir zamanlar nöbetçiydi. Kalp'in sesini duydu ve kendini ateşe teslim etti.",
+     "voice": "sera_boss_pre_4_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Ateş Komutanı benim için savaştı, şimdi seninle savaşıyor. Aranızda bir fark göremiyorum, nöbetçi.",
+     "voice": "karun_boss_pre_4_3"
+    }
+   ],
+   "5": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Buzun içinde donmuş bir taht. Üstünde nefreti dondurulmuş bir hükümdar...",
+     "voice": "anlatici_boss_pre_5_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Donmuş Han. Kârun'a en uzun direnen hükümdar. Kârun onu tahtına zincirleyip diri diri dondurdu.",
+     "voice": "sera_boss_pre_5_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Han direndi. İşte bu yüzden orada. Direnenler hep böyle biter.",
+     "voice": "karun_boss_pre_5_3"
+    }
+   ],
+   "6": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Ağacın gövdesine gömülü, mor dikenlerle sarılmış, ağlayan bir kadın...",
+     "voice": "anlatici_boss_pre_6_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Lyra... Yoldaşım. Benimle birlikte indi bu zindana. Kârun onu ağaca bağladı ki kimse bana ulaşmasın. Onu kurtar, evlat. Benim için.",
+     "voice": "sera_boss_pre_6_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Lyra seni öldürmezse, ardındaki gerçek öldürür. Sera sana hâlâ kim olduğunu söylemedi, değil mi?",
+     "voice": "karun_boss_pre_6_3"
+    }
+   ],
+   "7": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Demir kapının ardından mor sis taşıyor. Yüzünün yarısı yanık, zırhı etine kaynamış dev bir subay...",
+     "voice": "anlatici_boss_pre_7_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Valen'in komutanı. Bozkırda seni sapık ilan eden adam. Mor sis onu da yuttu... ama nefreti hâlâ onun.",
+     "voice": "sera_boss_pre_7_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Valen'in kahramanını ben yarattım. İmparatorluk sizi küle çevirmeye çalıştı; ben sadece onu daha güçlü kıldım.",
+     "voice": "karun_boss_pre_7_3"
+    }
+   ],
+   "8": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kürsünün önünde, havada dönen altın bir kılıç. Yüzü demir bir maskeyle örtülü yaşlı bir usta...",
+     "voice": "anlatici_boss_pre_8_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bu... ataların hocası. Kurucuya kılıç tutmayı o öğretti. Kârun ona demir maskeyi taktı ve mutlak düzene boyun eğdirdi.",
+     "voice": "sera_boss_pre_8_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Ustanız bana itaat etmeyi öğrendi, nöbetçi. Ondan da bir şey öğrenmeni isterim: boyun eğmek bazen hayatta kalmaktır.",
+     "voice": "karun_boss_pre_8_3"
+    }
+   ],
+   "9": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Gerçeklik parçalanıyor. Obsidyen tozundan dev bir göz yavaşça açılıyor...",
+     "voice": "anlatici_boss_pre_9_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "...Bu benim eserim değil. Kapının ötesindeki irade. Kalp'i yutmak istiyor.",
+     "voice": "karun_boss_pre_9_2"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Kârun bile korkuyor. Bu herkesin düşmanı, evlat. Gözünü ondan ayırma.",
+     "voice": "sera_boss_pre_9_3"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Bu sefer... yalnızca bu sefer, seninle aynı taraftayım. Onu durdur.",
+     "voice": "karun_boss_pre_9_4"
+    }
+   ],
+   "10": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kalp'in kızıl ışığında mor kristallerle delinmiş dev bir kurt. Gök Börü, Kalp'in kadim bekçisi...",
+     "voice": "anlatici_boss_pre_10_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Gök Börü... Nöbetçilerin işareti, kurt ve güneş. Kârun onu da yozlaştırmış. Onu öldürme evlat, arındır.",
+     "voice": "sera_boss_pre_10_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Bekçiniz artık benim zincirim. Onu geçersen, tahtımın önünde seni bekliyor olacağım.",
+     "voice": "karun_boss_pre_10_3"
+    }
+   ]
+  },
+  "boss_post": {
+   "1": [
+    {
+     "speaker": "SERA",
+     "text": "Kardeş huzura kavuştu. Bin yıllık bekleyiş bitti.",
+     "voice": "sera_boss_post_1_1"
+    },
+    {
+     "speaker": "NARRATOR",
+     "text": "Arktan bir an başka bir hayatı görür: bozkırda kurultay ateşleri, omzunda kurt postu taşıyan genç bir savaşçı. Bu anıyı kendi geçmişi sanır.",
+     "voice": "anlatici_boss_post_1_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "...İlginç. Kapıyı bin yıl tuttu. Sen birkaç dakikada indirdin. Devam et bakalım.",
+     "voice": "karun_boss_post_1_3"
+    }
+   ],
+   "2": [
+    {
+     "speaker": "SERA",
+     "text": "Gölge Dokuyucu dağıldı. Bir zamanlar kitapları seven bir çıraktı.",
+     "voice": "sera_boss_post_2_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Çırağım sonuna kadar sadıktı. Bundan gurur duyuyorum.",
+     "voice": "karun_boss_post_2_2"
+    }
+   ],
+   "3": [
+    {
+     "speaker": "SERA",
+     "text": "Köle Efendisi düştü! Her kurtardığın esir önemli, evlat. Unutma.",
+     "voice": "sera_boss_post_3_1"
+    },
+    {
+     "speaker": "NARRATOR",
+     "text": "Arktan yine bir anı görür: İlk Ateş. Nöbetçiler mühür çeliğini ilk kez dövüyor.",
+     "voice": "anlatici_boss_post_3_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Köle Efendisi işe yarardı. Artık yaramıyor. Sana daha iyilerini tanıştıracağım.",
+     "voice": "karun_boss_post_3_3"
+    }
+   ],
+   "4": [
+    {
+     "speaker": "SERA",
+     "text": "Ateş Komutanı söndü. Ama bak... ölürken bile Kalp'in adını fısıldıyordu.",
+     "voice": "sera_boss_post_4_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "En sadık askerlerimden biriydi. Bence yanlış taraftasın, nöbetçi.",
+     "voice": "karun_boss_post_4_2"
+    }
+   ],
+   "5": [
+    {
+     "speaker": "SERA",
+     "text": "Donmuş Han'ın laneti çözüldü. Buz eridi, hükümdar huzura kavuştu.",
+     "voice": "sera_boss_post_5_1"
+    },
+    {
+     "speaker": "NARRATOR",
+     "text": "Arktan bir anı daha görür: İlk Savaş. Kapılar kapanırken binlerce yoldaş öbür tarafta kalıyor.",
+     "voice": "anlatici_boss_post_5_2"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Yarısını geçtin. Sera sana hâlâ kim olduğunu söylemedi, değil mi?",
+     "voice": "karun_boss_post_5_3"
+    }
+   ],
+   "6": [
+    {
+     "speaker": "SERA",
+     "text": "Lyra... huzura kavuştu. Ve sen... evlat, artık sana söylemeliyim.",
+     "voice": "sera_boss_post_6_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Ben senin büyük büyük büyük annenim. Gördüğün anılar senin değil; kanındaki ataların. Bu kat benim mezarım.",
+     "voice": "sera_boss_post_6_2"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Zincirlerimi kırdın. Ruhum artık kırık kılıcına bağlı. Buradan sonra yanındayım, Kalp'e kadar.",
+     "voice": "sera_boss_post_6_3"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Demek sonunda söyledi. Ölü bir büyükanne ve kırık bir kılıç. Benim karşıma bununla mı geleceksin?",
+     "voice": "karun_boss_post_6_4"
+    }
+   ],
+   "7": [
+    {
+     "speaker": "SERA",
+     "text": "Komutan düştü. Valen'in nefreti burada bitti... en azından bu zindanda.",
+     "voice": "sera_boss_post_7_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "İmparatorluk bir askerini daha kaybetti. Onlar için ağlamayacağım. Sen de ağlama.",
+     "voice": "karun_boss_post_7_2"
+    }
+   ],
+   "8": [
+    {
+     "speaker": "SERA",
+     "text": "Maskesi kırıldı. Son nefesinde kanını tanıdı, evlat. Atalarının gözlerini gördü sende.",
+     "voice": "sera_boss_post_8_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Usta seni tanıdı ve bu onu yavaşlattı. Hatıralar her zaman zayıflıktır.",
+     "voice": "karun_boss_post_8_2"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bir bölge kaldı. Kalp yakın. Hazır mısın?",
+     "voice": "sera_boss_post_8_3"
+    }
+   ],
+   "9": [
+    {
+     "speaker": "KARUN",
+     "text": "Kapının ötesindeki iradeyi durdurdun. Beklenmedik... Ama aramızdaki hesap kapanmadı.",
+     "voice": "karun_boss_post_9_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bin yıllık yoldaşlarımız artık rahat uyuyabilir. Son bölge, evlat. Kalp ve Kara Taht.",
+     "voice": "sera_boss_post_9_2"
+    }
+   ],
+   "10": [
+    {
+     "speaker": "SERA",
+     "text": "Gök Börü arındı. Kurt uyuyor... Şimdi sıra onda. Kârun tahtında bekliyor.",
+     "voice": "sera_boss_post_10_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Bekçimi geri aldın. Güzel. Artık aramızda yalnızca ben ve Kalp var.",
+     "voice": "karun_boss_post_10_2"
+    }
+   ]
+  },
+  "npc_rescue": {
+   "peasant": [
+    [
+     {
+      "speaker": "PEASANT",
+      "text": "Tanrım! Kurtarıldım! Seni tüm ömrüm boyunca hayırlayacağım, şövalye!"
+     },
+     {
+      "speaker": "PEASANT",
+      "text": "Bu küçük altınlarım ama hepsini sana verdim. Umarım işine yarar."
+     }
+    ],
+    [
+     {
+      "speaker": "PEASANT",
+      "text": "Canımı kurtardın! Bu canavarlar köyümü yaktı, ailemi kaçırdı..."
+     },
+     {
+      "speaker": "SERA",
+      "text": "Bu Kârun'un işi. Masumları tutsak ederek gücünü pekiştiriyor.",
+      "voice": "sera_esir_peasant_2_2"
+     },
+     {
+      "speaker": "PEASANT",
+      "text": "Altınlarım senin olsun, şövalye. Git ve bu karanlığı bitir."
+     }
+    ]
+   ],
+   "soldier": [
+    [
+     {
+      "speaker": "SOLDIER",
+      "text": "Asker olarak savaştım ama bu zindanlarda beni geçtiler."
+     },
+     {
+      "speaker": "SOLDIER",
+      "text": "Al bu bilgiyi: Düşmanların zayıf noktasına vur, ön cepheye körü körüne girme. Sana savaş sırrımı veriyorum."
+     }
+    ],
+    [
+     {
+      "speaker": "SOLDIER",
+      "text": "Kurtarıldım! On yıl orduda savaştım. O deneyimi sana aktarayım en azından."
+     },
+     {
+      "speaker": "SERA",
+      "text": "Kârun bir zamanlar bu askerlerin komutanıydı. Onları tutsak etmesi ihanet.",
+      "voice": "sera_esir_soldier_2_2"
+     },
+     {
+      "speaker": "SOLDIER",
+      "text": "Git ve onu yak, şövalye. Biz seni bekliyoruz."
+     }
+    ]
+   ],
+   "mage": [
+    [
+     {
+      "speaker": "MAGE_NPC",
+      "text": "Ah... nihayet! Büyülerim bu zindan duvarlarında soldu."
+     },
+     {
+      "speaker": "MAGE_NPC",
+      "text": "Ama sana hayat enerjisi verebilirim. Büyüm zayıf ama kalbim güçlü."
+     }
+    ],
+    [
+     {
+      "speaker": "MAGE_NPC",
+      "text": "Şövalye! Kârun'un büyücüleri beni tutsak etti."
+     },
+     {
+      "speaker": "SERA",
+      "text": "Bir meslektaşım! Kârun çok sayıda büyücüyü esir almış.",
+      "voice": "sera_esir_mage_2_2"
+     },
+     {
+      "speaker": "MAGE_NPC",
+      "text": "Bu şükranımı kabul et. Git ve Kârun'u durdur — onun büyüsü beni zayıf bıraktı."
+     }
+    ]
+   ],
+   "merchant": [
+    [
+     {
+      "speaker": "MERCHANT",
+      "text": "Şövalye! Büyük bedel ödeyebilirdim ama kaçış yolu yoktu."
+     },
+     {
+      "speaker": "MERCHANT",
+      "text": "Hazinemin bir kısmı burada. Al — iyi bir yatırıma dönüşsün!"
+     }
+    ],
+    [
+     {
+      "speaker": "MERCHANT",
+      "text": "Kurtuluşumu anlatamazsam bile cüzdanım konuşur."
+     },
+     {
+      "speaker": "MERCHANT",
+      "text": "Ticaret hayatım boyunca öğrendim: İyilik dönüp gelir. Bu altınlar senin."
+     }
+    ]
+   ]
+  },
+  "events": {
+   "first_kill": [
+    {
+     "speaker": "SERA",
+     "text": "İlk düşmanını yendin. Bir adım daha. Zindan seni test ediyor.",
+     "voice": "sera_events_first_kill_1"
+    }
+   ],
+   "first_chest": [
+    {
+     "speaker": "SERA",
+     "text": "İlk sandık! Kârun'un bıraktığı artıklar bazen işe yarar.",
+     "voice": "sera_events_first_chest_1"
+    }
+   ],
+   "low_hp": [
+    {
+     "speaker": "SERA",
+     "text": "Dikkat! Çok hasar aldın. Hemen bir iyileşme kaynağı ara!",
+     "voice": "sera_events_low_hp_1"
+    }
+   ],
+   "critical_hp": [
+    {
+     "speaker": "SERA",
+     "text": "Evlat! Neredeyse ölüyorsun! Geri çekil, hemen!",
+     "voice": "sera_events_critical_hp_1"
+    }
+   ],
+   "level_up_5": [
+    {
+     "speaker": "SERA",
+     "text": "Seviye 5! Giderek daha tehlikeli bir düşman oluyorsun, Kârun için.",
+     "voice": "sera_events_level_up_5_1"
+    }
+   ],
+   "level_up_10": [
+    {
+     "speaker": "SERA",
+     "text": "Seviye 10! Zindan seni büyüttü. Ben bunu fark ediyorum.",
+     "voice": "sera_events_level_up_10_1"
+    }
+   ],
+   "idle_too_long": [
+    {
+     "speaker": "SERA",
+     "text": "Duruyorsun... Savaşmak zor, ama zindan seni beklemez.",
+     "voice": "sera_events_idle_too_long_1"
+    }
+   ],
+   "first_boss_kill": [
+    {
+     "speaker": "SERA",
+     "text": "İlk mühür bekçisi düştü! Kârun'un zindanı çatlamaya başladı.",
+     "voice": "sera_events_first_boss_kill_1"
+    }
+   ],
+   "first_npc_rescue": [
+    {
+     "speaker": "SERA",
+     "text": "Bir tutsağı kurtardın! Kârun güçlünün kazandığını söyler — ama merhamet de bir güçtür.",
+     "voice": "sera_events_first_npc_rescue_1"
+    }
+   ],
+   "many_rescues": [
+    {
+     "speaker": "SERA",
+     "text": "Beş kişiyi kurtardın, evlat. Nöbetçiler de böyleydi.",
+     "voice": "sera_events_many_rescues_1"
+    }
+   ],
+   "level_up_mage": [
+    {
+     "speaker": "SERA",
+     "text": "Damarlarındaki ateş, kurultay ateşlerinin ta kendisi. Gücünü doğru yere yönlendir.",
+     "voice": "sera_events_level_up_mage_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "İki kıvılcım çaktın diye kendini kam mı sanıyorsun? O ateşin bedelini Sera sana söylemedi mi?",
+     "voice": "karun_events_level_up_mage_2"
+    }
+   ],
+   "level_up_warrior": [
+    {
+     "speaker": "SERA",
+     "text": "O kırık kılıç kapıları kapatmak için dövüldü. Demiri dinle, evlat. Ataların da onu böyle tuttu.",
+     "voice": "sera_events_level_up_warrior_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Kırık bir kılıçla buraya kadar gelmişsin. Atanda da bu inat vardı, onu da kapının önünde gömdük.",
+     "voice": "karun_events_level_up_warrior_2"
+    }
+   ],
+   "level_up_ranger": [
+    {
+     "speaker": "SERA",
+     "text": "Ataların bozkırda rüzgarı okurdu. Nefesini tut, hedefini seç.",
+     "voice": "sera_events_level_up_ranger_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "Gölge gibi süzüldüğünü mü sanıyorsun? Yayının geriliş sesini 100 kat yukarıdan duyuyorum.",
+     "voice": "karun_events_level_up_ranger_2"
+    }
+   ],
+   "time_echo_spawn": [
+    {
+     "speaker": "KARUN",
+     "text": "Kapının ötesinde herkes kendi yankısıyla karşılaşır. O yüze bak, nöbetçi. Tanıdık mı?",
+     "voice": "karun_events_time_echo_spawn_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bu senin yansıman. Senin yaptığını yapar. Atışını görür, geri yollar. Onu anlayarak geç.",
+     "voice": "sera_events_time_echo_spawn_2"
+    }
+   ],
+   "karun_final_appears": [
+    {
+     "speaker": "KARUN",
+     "text": "Bekçim düştü. Şimdi yüz yüzeyiz. Kanını bana ver, nöbetçi; Kalp'i yalnızca o mühürler.",
+     "voice": "karun_events_karun_final_appears_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Evlat, bu an için doğdun. Ne seçersen seç, ben yanındayım.",
+     "voice": "sera_events_karun_final_appears_2"
+    }
+   ],
+   "ending_light": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Arktan kılıcını Kârun'a saplamadı. Mühür çeliğini asasına dokundurdu ve mor sis çözüldü.",
+     "voice": "anlatici_events_ending_light_1"
+    },
+    {
+     "speaker": "KARUN",
+     "text": "...Dünya ölüyordu. Ben sadece... kurtarmak istedim.",
+     "voice": "karun_events_ending_light_2"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Bunu sen başardın, evlat. Artık huzurla gidebilirim. Göğün Nöbetçileri yeniden doğacak, senin önderliğinde.",
+     "voice": "sera_events_ending_light_3"
+    }
+   ],
+   "ending_iron": [
+    {
+     "speaker": "NARRATOR",
+     "text": "Kârun düştü ve Kalp zincirlerinden boşaldı. Arktan mühür çeliğini Kalp'e dayadı ve onu kendi kanıyla sonsuza dek mühürledi.",
+     "voice": "anlatici_events_ending_iron_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Elveda, evlat. Mühür tuttu. Nöbetçilerin son görevi tamamlandı.",
+     "voice": "sera_events_ending_iron_2"
+    },
+    {
+     "speaker": "NARRATOR",
+     "text": "Zindan çöktü. Bozkır halkı artık kendi kaderiyle baş başa.",
+     "voice": "anlatici_events_ending_iron_3"
+    }
+   ],
+   "ending_dark": [
+    {
+     "speaker": "KARUN",
+     "text": "Asam senin oldu... Kalp'in gücü senin oldu. Bak kendine, nöbetçi. Bak neye dönüştün.",
+     "voice": "karun_events_ending_dark_1"
+    },
+    {
+     "speaker": "SERA",
+     "text": "Evlat... dur... beni duy...",
+     "voice": "sera_events_ending_dark_2"
+    },
+    {
+     "speaker": "NARRATOR",
+     "text": "Arktan Sera'nın sesini zihninden sildi. Gözleri mor alevle yanarken Kara Taht'a oturdu.",
+     "voice": "anlatici_events_ending_dark_3"
+    }
+   ]
+  }
+ }
+}
