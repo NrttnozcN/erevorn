@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/fx_slash_w.png-38933b7ce1d3df5b1e1ead6a6e259d
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

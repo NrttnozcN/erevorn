@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/fx_trail_gold.png-e6f1439348c89e5507e0e8e96f8
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

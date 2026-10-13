@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/boss_z8_cast.png-b37b3d645d2af602266d303c80e0
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

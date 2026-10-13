@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/fx_void_portal.png-4d8a7f95378a1f8600b83a55ba
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

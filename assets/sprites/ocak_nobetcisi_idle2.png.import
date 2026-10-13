@@ -15,9 +15,9 @@ dest_files=["res://.godot/imported/ocak_nobetcisi_idle2.png-a332e1c76cb5fdd34357
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
